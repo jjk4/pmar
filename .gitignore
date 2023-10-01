@@ -1,0 +1,6 @@
+venv
+output
+tempdir
+abcde.*
+!abcde.conf_example
+.env

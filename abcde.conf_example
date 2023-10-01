@@ -1,0 +1,16 @@
+# Output format
+OUTPUTTYPE="mp3"
+
+# Output directory DO NOT CHANGE THIS!!!
+OUTPUTDIR="tempdir/music/"
+
+# Encode options for MP3
+LAMEOPTS="--preset extreme"
+
+# Specify the tagging program as id3v2.3 and set options
+ID3TAGV=id3v2.3
+ID3OPTS=""
+ID3V2OPTS=""
+
+# Customize the folder and filename structure for individual tracks
+OUTPUTFORMAT='${ARTISTFILE}/${ALBUMFILE}/${TRACKNUM}-${TRACKFILE}'
