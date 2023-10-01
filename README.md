@@ -6,7 +6,7 @@ The only thing You have to do is put in the CD, close the tray and wait 😎
 This Repo is tested on Ubuntu Desktop 23.04, but it should work on the most Debian-based distros too. No support for Windows or Mac yet.
 
 #### Install Prerequisites
-`sudo apt install abcde lame cdparanoia id3v2 git`
+`sudo apt install abcde lame cdparanoia id3v2 git python3-venv`
 
 #### Download PMAR
 `git clone https://github.com/jjk4/pmar && cd pmar`
