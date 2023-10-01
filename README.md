@@ -25,7 +25,7 @@ source venv/bin/activate
 ```
 
 #### Install required python modules
-`pip install Google-Images-Search pillow mutagen python-dotenv`
+`pip install Google-Images-Search pillow mutagen python-dotenv musicbrainzngs`
 
 ## Configuration
 There are 2 configuration files. *abcde.conf* for configuring abcde (you can leave this as it is) and *.env*.
@@ -46,6 +46,7 @@ This is the path to your abcde.conf file. You can leave it as it is.
 This is the path where all the ripped music is saved to. This path can be relative or absolute. Be careful about the "/" in the end.
 
 ###### Configuring Google API Keys
+If you want to use Google Search, set `USE_GOOGLE = "True"`
 (see [https://pypi.org/project/Google-Images-Search/](https://pypi.org/project/Google-Images-Search/))
 -   Visit [https://console.developers.google.com](https://console.developers.google.com) and create a project.
 
