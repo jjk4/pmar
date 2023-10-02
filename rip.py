@@ -40,9 +40,10 @@ def get_drive_state(device): # 0 = no info; 1 = no disc; 2 = tray open; 3 = not 
 
 def get_id3_artist():
     filepath = "tempdir/music/"
-    filepath += os.listdir("tempdir/music/")[0] + "/"
-    filepath += os.listdir(filepath)[0] + "/"
-    filepath += os.listdir(filepath)[0]
+    filepath += os.listdir("tempdir/music/")[0]
+    filepath += "/" + os.listdir(filepath)[0]
+    if(os.path.isdir(filepath)):
+        filepath += "/" + os.listdir(filepath)[0]
     audio = EasyID3(filepath)
     search_term = audio["artist"][0]
     search_term = search_term.replace("_", " ")
@@ -50,15 +51,17 @@ def get_id3_artist():
 
 def get_id3_album():
     filepath = "tempdir/music/"
-    filepath += os.listdir("tempdir/music/")[0] + "/"
-    filepath += os.listdir(filepath)[0] + "/"
-    filepath += os.listdir(filepath)[0]
+    filepath += os.listdir("tempdir/music/")[0]
+    filepath += "/" + os.listdir(filepath)[0]
+    if(os.path.isdir(filepath)):
+        filepath += "/" + os.listdir(filepath)[0]
     audio = EasyID3(filepath)
     search_term = audio["album"][0]
     search_term = search_term.replace("_", " ")
     return search_term
 
 def download_images_google():
+    print("searching for:" + get_id3_artist() + " " + get_id3_album() + " Cover")
     _search_params = {
         'q': get_id3_artist() + " " + get_id3_album() + " Cover",
         'num': 10,
