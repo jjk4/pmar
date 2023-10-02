@@ -21,6 +21,16 @@ if(os.getenv("USE_GOOGLE") == "True"):
 else:
     USE_GOOGLE = False
 
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKCYAN = '\033[96m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
 
 def get_drive_state(device): # 0 = no info; 1 = no disc; 2 = tray open; 3 = not ready yet; 4 = disc ok
     fd = os.open(device, os.O_NONBLOCK) or os.exit(1)
@@ -61,9 +71,7 @@ def download_images_musicbrainz():
     try:
         artist = get_id3_artist()
         album = get_id3_album()
-        print("Searching for " + artist + " and " + album)
         artist_id = musicbrainzngs.search_artists(query=artist, limit=1)["artist-list"][0]["id"]
-        print(artist_id)
         album_id = musicbrainzngs.search_releases(query=album, artist=artist_id, limit=1)["release-list"][0]["id"]
 
         imgdata = musicbrainzngs.get_image_list(album_id)["images"]
@@ -133,24 +141,24 @@ gis = GoogleImagesSearch(GOOGLE_API_KEY, GOOGLE_SEARCH_KEY)
 while True:
     skip_images = False
     if(get_drive_state(DEVICE) == 4):
-        print("RIPPING CD!!!")
+        print(bcolors.OKGREEN + "RIPPING CD!!!" + bcolors.ENDC)
         os.system("abcde -N -c " + ABCDE_CONF + " -d " + DEVICE)
-        print("Downloading Images...")
+        print(bcolors.OKGREEN + "Downloading Images..." + bcolors.ENDC)
         if(download_images_musicbrainz() == False):
             if(USE_GOOGLE):
-                print("No album art found on Musicbrainz. Searching on Google...")
+                print(bcolors.OKCYAN + "No album art found on Musicbrainz. Searching on Google..." + bcolors.ENDC)
                 download_images_google()
             else:
                 skip_images = True
-                print("Could not find album art. Skipping")
+                print(bcolors.WARNING + "Could not find album art. Skipping" + bcolors.ENDC)
         if(not(skip_images)):
             get_best_image()
             resize_image()
             add_images_to_id3()
-        print("Finishing...")
+        print(bcolors.OKGREEN + "Finishing..." + bcolors.ENDC)
         cleanup()
         os.system("eject " + DEVICE)
         time.sleep(1)
     else:
-        print("Waiting for Disk...")
+        print(bcolors.OKGREEN + "Waiting for Disk..." + bcolors.ENDC)
         time.sleep(1)
