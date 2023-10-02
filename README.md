@@ -67,4 +67,5 @@ Now you can start the script with
 
 You can now insert a CD. When the process is finished, it will be automatically ejected.
 ## Credits
-This project was inspired by [Actionschnitzel](https://github.com/actionschnitzel)
+- This project was inspired by [Actionschnitzel](https://github.com/actionschnitzel)
+- CD icon by [LGU_Jaws](https://openclipart.org/artist/LGU_Jaws)
